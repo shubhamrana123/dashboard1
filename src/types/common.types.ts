@@ -17,3 +17,8 @@ export interface ISnackBarProps {
     setOpen?: any;
     isError?: boolean;
 };
+export interface IModal {
+    Title : string,
+    component : any,
+    onClose: any
+}

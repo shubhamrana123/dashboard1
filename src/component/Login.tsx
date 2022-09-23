@@ -1,4 +1,4 @@
-import React ,{useState} from 'react'
+import React, { useState } from 'react'
 import { ICompany } from '../types/company.types'
 import { ILoginProps } from '../types/login.types'
 // import { IPhysician } from '../types/physician.type'
@@ -20,118 +20,138 @@ import { useTheme } from '@mui/material/styles';
 import { ErrorSharp } from '@mui/icons-material'
 import { useForm } from 'react-hook-form';
 const Login = (props: ILoginProps) => {
-  const {register,handleSubmit,getValues,formState:{errors}} = useForm<any>()
-  const [loginModelVisibility,seLoginModelVisibility] = useState<boolean>(false);
-  const [showList,setShowList] = useState<boolean>(false);
-    const [formData,setFormData] = useState(null)
-    const [open, setOpen] = React.useState(false);
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  
-    const handleClickOpen = (data:any) => {
-        console.log(data);
-      setOpen(true);
-      setFormData(data)
-    };
-  
-    const handleClose = () => {
-      setOpen(false);
-    };
-  
-    const onLoginHandler = (data:any) => {
-     // const companyDetails: ICompany = {
-        //     Year: props.getValues('year'),
-        //     Staff: props.getValues('staff')
-        // }
-     
-console.log(data);
-setFormData(data)
+  const { register, handleSubmit, getValues, formState: { errors } } = useForm<any>()
+  const [loginModelVisibility, setLoginModelVisibility] = useState<boolean>(false);
+  const [showList, setShowList] = useState<boolean>(false);
+  const [formData, setFormData] = useState(null)
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
-        // props.onLoginHandler(companyDetails);
-    }
-    const openModelHandler = ()=>
-    {
-  
-      seLoginModelVisibility(true);
-    }
-    return (
-        <>
+  const handleClickOpen = (data: any) => {
+    console.log(data);
+    setOpen(true);
+    setFormData(data)
+  };
+console.log(loginModelVisibility);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const onLoginHandler = (data: any) => {
+    // const companyDetails: ICompany = {
+    //     Year: props.getValues('year'),
+    //     Staff: props.getValues('staff')
+    // }
+
+    console.log(data);
+    setFormData(data)
+
+    // props.onLoginHandler(companyDetails);
+  }
+  const openModelHandler = () => {
+    // if(props.errors.founder.type){
+    //   alert("hi")
+    //   // console.log(props.errors);
+
+    //   setLoginModelVisibility(false)
+    // }
+    // else 
+    // {      alert('true')
+    //   setLoginModelVisibility(true)  
+    // }
+    // if( (props.errors.founder &&    props.errors.ceo && props.errors.netSales && props.errors.staffs && props.errors.bestKnownFor))
+    // {alert ('false')
+    //   setLoginModelVisibility(false);
+    // }
+    // else{
+    //   alert ('true')
+    //   setLoginModelVisibility(true);
+    // }
+   !props.errors.ceo && !props.errors.founder && !props.errors.netSales && !props.errors.staffs && !props.errors.bestKnownFor && setLoginModelVisibility(true)
+    // {props.errors?seLoginModelVisibility(false):alert("hi")}
+
+  }
+  return (
+    <>
 
 
-<form onSubmit={props.handleSubmit(onLoginHandler)}>
-                <div className="login-form-control">
+      <form onSubmit={props.handleSubmit(onLoginHandler)}>
+        <div className="login-form-control">
 
 
-                    <Input controller='yearFounded' type='text' label='Year Founded' register={register} errors={errors}
-                        fields={{ required: true, minLength: 2, maxLength: 100 }}></Input> <br />
-                        {/* {props.errors && <p>Please Provide Valid Information</p>} */}
-                </div>
-                <div className="login-form-control">
-                    <Input controller='founder' type='text' label='Founder' register={props.register} errors={props.errors}
-                        fields={{ required: true, minLength: 2, maxLength: 100 }}></Input>
-                          {/* {props.errors && <p>Please Provide Valid Information</p>} */}
-                </div>
-                <div className="login-form-control">
-                    <Input controller='ceo' type='text' label='Ceo' register={props.register} errors={props.errors}
-                        fields={{ required: true, minLength: 2, maxLength: 100 }}></Input>
-                          {/* {props.errors && <p>Please Provide Valid Information</p>} */}
-                </div>
-                <div className="login-form-control">
-                    <Input controller='staff' type='text' label='staff' register={props.register} errors={props.errors}
-                        fields={{ required: true, minLength: 2, maxLength: 100 }}></Input>
-                          {/* {props.errors && <p>Please Provide Valid Information</p>} */}
-                </div>
-                <div className="login-form-control">
-                    <Input controller='netSales' type='text' label='Net Sales' register={props.register} errors={props.errors}
-                        fields={{ required: true, minLength: 2, maxLength: 100 }}></Input>
-                          
-                </div>
-                <div className="login-form-control">
-                    <Input controller='bestKnownFor' type='text' label='Best Known For' register={props.register} errors={props.errors}
-                        fields={{ required: true, minLength: 2, maxLength: 100 }}></Input>
-                        
-                </div>
-                {/* <QrCode formData= {formData}/> */}
-                <div className="login-form-btn">
-                    <button type='submit'  onClick={openModelHandler}>Submit</button>
-                    {/* <ResponsiveDialog></ResponsiveDialog> */}
-                    {loginModelVisibility && 
-      <FormDialog 
-          Title=''
-          onClose={seLoginModelVisibility} 
-          component={<QrCode formData= {formData}/>}/>}
-                    {/* <Button variant="outlined" onClick={handleClickOpen}>
+          <Input controller='yearFounded' type='text' label='Year Founded' register={register} errors={props.errors}
+            fields={{ required: true, minLength: 2, maxLength: 100 }}></Input> <br />
+          {props.errors.yearFounded && <b>Please Provide Valid Information</b>}
+        </div>
+        <div className="login-form-control">
+          <Input controller='founder' type='text' label='Founder' register={props.register} errors={props.errors}
+            fields={{ required: true, minLength: 2, maxLength: 100 }}></Input>
+          {props.errors.founder && <b>Please Provide Valid Information</b>}
+        </div>
+        <div className="login-form-control">
+          <Input controller='ceo' type='text' label='Ceo' register={props.register} errors={props.errors}
+            fields={{ required: true, minLength: 2, maxLength: 100 }}></Input>
+          {props.errors.ceo && <b>Please Provide Valid Information</b>}
+        </div>
+        <div className="login-form-control">
+          <Input controller='staff' type='number' label='staff' register={props.register} errors={props.errors}
+            fields={{ required: true, minLength: 2, maxLength: 100 }}></Input>
+          {props.errors.staff && <b>Please Provide Valid Information</b>}
+        </div>
+        <div className="login-form-control">
+          <Input controller='netSales' type='number' label='Net Sales' register={props.register} errors={props.errors}
+            fields={{ required: true, minLength: 2, maxLength: 100 }}></Input>
+          {props.errors.netSales && <b>Please Provide Valid Information</b>}
+        </div>
+        <div className="login-form-control">
+          <Input controller='bestKnownFor' type='text' label='Best Known For' register={props.register} errors={props.errors}
+            fields={{ required: true, minLength: 2, maxLength: 100 }}></Input>
+          {props.errors.bestKnownFor && <b>Please Provide Valid Information</b>}
+        </div>
+        {/* <QrCode formData= {formData}/> */}
+        <div className="login-form-btn">
+          <button type='submit' onClick={openModelHandler}>Submit</button>
+          {/* <ResponsiveDialog></ResponsiveDialog> */}
+          <div className="row">
+            <div className="col-md-4"></div>
+            <div className="col-md-4">
+            {loginModelVisibility &&
+            <FormDialog
+              Title=''
+              onClose={setLoginModelVisibility}
+              component=
+            
+              {
+      
+
+             
+             
+          <div className='row'>
+            <div className='col-md-4'></div>
+            <div className='col-md-4'>
+            {/* <QrCode formData={formData} /> */}
+            ewwee
+            </div>
+          </div>
+          
+          } />}
+            </div>
+          </div>
+         
+          {/* <Button variant="outlined" onClick={handleClickOpen}>
         Submit form
       </Button> */}
-      <Dialog
-        fullScreen={fullScreen}
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="responsive-dialog-title"
-      >
-        <DialogTitle id="responsive-dialog-title">
-          {"Qr code"}
-        </DialogTitle>
-        <DialogContent>
-        <QrCode formData= {formData}/>
-        </DialogContent>
-        <DialogActions>
-          {/* <Button autoFocus onClick={handleClose}>
-            Disagree
-          </Button> */}
-          <Button onClick={handleClose} autoFocus>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-                </div>
 
-            </form>
+        </div>
 
-            
+      </form>
 
-        </>
-    )
+
+
+    </>
+  )
 }
 
 export default Login

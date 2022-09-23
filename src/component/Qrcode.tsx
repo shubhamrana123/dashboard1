@@ -20,7 +20,7 @@ console.log(e);
     <QRCodeCanvas
       id="qrCode"
       value={props.formData}
-      size={100}
+      size={200}
       bgColor={"#00ff00"}
       level={"H"}
     />

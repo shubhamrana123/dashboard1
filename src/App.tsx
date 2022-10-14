@@ -1,7 +1,11 @@
 import RootNavigation from "./container/navigation";
 
 const App = () => {
-  return <RootNavigation />;
+  return (
+    <>
+      <RootNavigation />
+    </>
+  );
 };
 
 export default App;

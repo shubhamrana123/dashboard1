@@ -2,6 +2,7 @@ import { Button, Typography } from "@mui/material";
 import { green, purple } from "@mui/material/colors";
 import { Container, Stack } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   DECREASE_COUNTER_1,
   DECREASE_COUNTER_2,
@@ -12,7 +13,10 @@ import { fetchPosts, handleCounterAction } from "../../redux/actions/dashboard";
 
 const Dashboard = () => {
   const dispatch = useDispatch<any>();
-  const {allPosts, counter1, counter2} = useSelector((s: any) => s.counterReducer);
+  const navigate = useNavigate();
+  const { allPosts, counter1, counter2 } = useSelector(
+    (s: any) => s.counterReducer
+  );
 
   const handleCounter = (code: any) => {
     switch (code) {
@@ -32,13 +36,6 @@ const Dashboard = () => {
         dispatch(handleCounterAction(DECREASE_COUNTER_2, null));
       }
     }
-  };
-
-  const fetchAllPosts = async () => {
-    // const posts = await axios.get("https://jsonplaceholder.typicode.com/posts");
-    // console.log("All posts =", posts);
-    dispatch(fetchPosts())
-    // console.log("All posts =", allPosts);
   };
 
   return (
@@ -69,8 +66,13 @@ const Dashboard = () => {
           </Button>
         </Container>
         <Container sx={{ display: "flex", marginTop: 4 }}>
-          <Button onClick={fetchAllPosts} variant="contained">
+          <Button onClick={() => dispatch(fetchPosts())} variant="contained">
             Fetch All Posts
+          </Button>
+        </Container>
+        <Container sx={{ display: "flex", marginTop: 4 }}>
+          <Button onClick={() => navigate('/profile')} variant="contained">
+            Go to Profile Screen
           </Button>
         </Container>
       </Stack>
@@ -80,7 +82,7 @@ const Dashboard = () => {
         >
           {"Post title"}
         </Typography>
-        {allPosts?.map((item: { title: string, id: number }) => {
+        {allPosts?.map((item: { title: string; id: number }) => {
           return (
             <Typography
               key={item.id}
@@ -90,7 +92,6 @@ const Dashboard = () => {
             </Typography>
           );
         })}
-      
       </Stack>
     </Stack>
   );

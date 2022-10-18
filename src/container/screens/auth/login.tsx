@@ -14,13 +14,14 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+
 import BackgroundImage from "../../../assets/image/background-image-auth.png";
 import AppLogo from "../../../assets/image/infrablok-logo.png";
 import GoogleButton from "../../../assets/image/google-button.png";
 
 const LoginScreen = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const styles = {
     flex: 1,
     paperContainer: {

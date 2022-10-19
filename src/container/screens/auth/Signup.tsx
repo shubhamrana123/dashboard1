@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 import {
     Box,
     Button,
@@ -22,6 +23,7 @@ import AppLogo from "../../../assets/image/infrablok-logo.png";
 import GoogleButton from "../../../assets/image/google-button.png";
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const SignupScreen = () => {
+    const navigate = useNavigate()
  const [email ,setEmail] = useState('')
  const [password ,setPassword] = useState('')
  const [confirmPassword ,setConfirmPassword] = useState('')
@@ -64,12 +66,17 @@ validateEmail(email);
 
       else  if(password.length<8){
             setErrorMessage('Password length should be greater than 8 ')
+            setEmailErrorMessage('');
+            setConfirmPasswordEmailErrorMessage('')
             setError(true)
         }
         else if(password.length>=8){
+          setEmailErrorMessage('');
+          setConfirmPasswordEmailErrorMessage('')
             setErrorMessage('')
             setError(false)
         }
+      
         // else if (!password.match('/[a-z]/g'))
         // {
         //     setErrorMessage('Please Enter atleast lowerCase letter')
@@ -80,7 +87,7 @@ validateEmail(email);
         //     setErrorMessage('Please Enter atleast upperCase letter')
         //     setError(true)
         // }
-        // else if (!password.match(/[0-9]/g))
+        // else if (!password.match(/[0-9]/g))sdd
         // {
         //     setErrorMessage('Please Enter atleast  one digit')
         //     setError(true);
@@ -205,13 +212,13 @@ validateEmail(email);
         </div>
       
         <Stack display={'flex'} alignItems={'center'} marginTop={2}>
-          <Button  variant="contained" disableElevation onClick={signup}>
+          <Button fullWidth variant="contained" disableElevation onClick={signup}>
             Signup
           </Button>
         </Stack>
         </>
        
-        <p>Already have an account? <a href=""> Login</a> </p>
+        <p>Already have an account? <a  onClick={()=>navigate('/')} style={{textDecoration:'underline'}} > Login</a> </p>
       </Grid>
     </Grid>
   </Paper>

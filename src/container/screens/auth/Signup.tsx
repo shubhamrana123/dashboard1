@@ -47,7 +47,7 @@ const SignupScreen = () => {
      
       function validateEmail(email:string) {
         var re = /\S+@\S+\.\S+/;
-        console.log(re.test(email));
+        // console.log(re.test(email));
         
         return re.test(email);
       }
@@ -56,21 +56,36 @@ const SignupScreen = () => {
         // console.log(password);
         // console.log(confirmPassword);
 validateEmail(email);
-        if(!password && !confirmPassword && !email){
-            setErrorMessage('Password is Required')
+if(!validateEmail(email)){
+  setEmailErrorMessage('Please Enter Valid Email')
+}
+        if(!email  ){
+       
             setEmailErrorMessage('Email is Required')
-            setConfirmPasswordEmailErrorMessage('Confirm Password is Required')
+        
             setError(true)
+        }
+          if(!confirmPassword){
+          setConfirmPasswordEmailErrorMessage('Confirm Password is Required')
+          setError(true)
+        }
+         if(!password){
+        setErrorMessage(' Password is Required')
+        if(!confirmPassword){
+          setConfirmPasswordEmailErrorMessage('Confirm Password is Required')
+          // setError(true)
+        }
+          setError(true)
         }
        
 
-      else  if(password.length<8){
+     else    if(password.length<8 && confirmPassword.length <8){
             setErrorMessage('Password length should be greater than 8 ')
             setEmailErrorMessage('');
             setConfirmPasswordEmailErrorMessage('')
             setError(true)
         }
-        else if(password.length>=8){
+        else if(password.length>=8 && confirmPassword.length >=8){
           setEmailErrorMessage('');
           setConfirmPasswordEmailErrorMessage('')
             setErrorMessage('')
@@ -167,6 +182,7 @@ validateEmail(email);
         <div>
           <TextField
           required
+          type='password'
           error = {error}
           helperText={errorMessage}
               onChange={(e) => 
@@ -188,6 +204,8 @@ validateEmail(email);
         <div>
           <TextField
           required
+          type='password'
+          autoFocus={true}
           error = {error}
           inputProps={{ pattern: '/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$/' }}
           helperText={confirmPasswordErrorMessage}
